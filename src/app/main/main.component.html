@@ -1,0 +1,67 @@
+
+<!--Nav bar-->
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+
+    <div class="container">
+        <a href="" class="navbar-brand">TODO-LIST</a>
+     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarid">
+         <span class="navbar-toggler-icon"></span>
+     </button>
+   
+
+    <div class="collapse navbar-collapse" id="navbarid">
+        <ul class="navbar-nav text-white ml-auto">
+          <li class="nav-item active">
+          <span class="nav-link">Hello Raja!</span>
+          </li>
+        </ul>
+    </div>
+</div>
+</nav>
+
+<header>
+    <div class="container text-center my-4">
+      <h2 class="text-bold">Daily Schedule</h2>
+    </div>
+</header>
+
+<form [formGroup]="taskForm">
+<section id="body">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-6 my-4">
+               <div class="input-group">
+                   <input type="text" formControlName="taskName" placeholder="Add Task"  class="form-control">
+                   <div class="input-group-append">
+                    <button class="btn btn-primary" type="button" (click)="AddTask()" >Add</button>
+                   </div>
+               </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="List">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+             <ul class="list-group">
+                
+                 <li style="cursor: pointer;" class="list-group-item" *ngFor="let task of tasks;let i= index">
+                     <div class="form-inline">
+                        <input type="checkbox" [checked]="task.isFinished"  (change)="CheckOrUnCheck(i,$event,task)" class="form-check-input">
+                        &nbsp; <del [hidden]="!task.isFinished">{{task.taskName}}</del>
+                        <span [hidden]="task.isFinished">{{task.taskName}}</span>
+                        <span [hidden]="task.isFinished" class="ml-auto text-success text-bold">{{TodaysDate  | date: 'dd/MM/yyyy'}}</span>
+                        <span [hidden]="!task.isFinished" class="ml-auto text-danger text-bold">{{TodaysDate  | date: 'dd/MM/yyyy'}}</span>
+                        &nbsp;&nbsp;<i style="cursor:pointer" (click)="DelteTask(i)" class="fa fa-trash-o fa-lg" aria-hidden="true"></i>
+                     </div>
+                
+                    </li>
+                 
+             </ul>
+            </div>
+        </div>
+    </div>
+</section></form>
